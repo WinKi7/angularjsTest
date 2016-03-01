@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/angular.js"></script>
+</head>
+<body>
+      <div ng-controller="parentController">
+          <div ng-controller="ctr1Controller">name :
+              <input ng-model="name" type="text" ng-change="change(name);" />
+          </div>
+          <div ng-controller="ctr2Controller">Ctr1 name:
+              <input ng-model="ctr2Name" />
+          </div>
+      </div>
+</body>
+</html>
+<script type="text/javascript" src="ngJs/controllerCom.js"></script>

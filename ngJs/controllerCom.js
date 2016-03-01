@@ -1,0 +1,20 @@
+/**
+ * Created by Administrator on 2016/2/25.
+ */
+angular.module("myApp",[])
+    .controller("parentController",function($scope){
+          $scope.$on("ctr1NameChange",function(event,msg){
+              console.log("parent",msg);
+              $scope.$broadcast("ctr1NameChangeFromParent",msg);
+          })
+}).controller("ctr1Controller",function($scope){
+        $scope.change=function(name){
+            console.log("ctr1",name);
+            $scope.$emit("ctr1NameChange",name);
+        }
+    }).controller("ctr2Controller",function($scope){
+       $scope.$on("ctr1NameChangeFromParent",function(event,msg){
+           console.log("ctr2",msg);
+           $scope.ctr2Name=msg;
+       });
+    });

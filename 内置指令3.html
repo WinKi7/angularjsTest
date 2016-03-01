@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html ng-app="MyApp">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
+    <title></title>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <style type="text/css">
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+
+<form name="signup_form" ng-controller="FormController" ng-submit="submitForm()">
+    <div ng-repeat="field in fields" ng-form="signup_form_input">
+        <input type="text" name="dynamic_input" ng_required="field.isRequired"
+               ng-model="field.name" placeholder="{{field.placeholder}}"/>
+
+        <div ng-show="signup_form_input.dynamic_input.$dirty&&signup_form_input.dynamic_input.$invalid">
+            <span class="error"
+                  ng-show="signup_form_input.dynamic_input.$error.required"> The field is required. </span>
+        </div>
+    </div>
+    <input type="submit" ng-disabled="signup_form.$invalid" value="show all"/>
+</form>
+<div ng-controller="CityController">
+    <select id="aa" ng-model="city" ng-options="city.name for city in citys" onchange="upperCase(this.id)">
+        <option value="">Choose City</option>
+    </select>
+    Best City: {{ city.name }}
+</div>
+<div ng-controller="CityController2">
+    <select id="cc" ng-model="mycity" ng-options=" city.value as city.name for city in citys"
+            onchange="upperCase(this.id)">
+        <!-- <option value="{{city.value}}">Choose City</option>-->
+    </select>
+    Best City: {{ mycity }}
+</div>
+<div>
+    <form action="" ng-submit="submit()" ng-controller="FormController2">
+        Enter text and hit enter:
+        <input type="text" ng-model="person.name" name="person.name"/>
+        <input type="submit"
+               name="person.name"
+               value="Submit"/>
+        <code ng-cloak>people:{{people}}</code>
+        <ul ng-repeat="(index,object) in people">
+            <li ng-bind="object.name"></li>
+        </ul>
+    </form>
+</div>
+
+<div ng-controller="LotteryController">
+    <div ng-class="{red:x>5}" ng-if="x>5">
+        You Win !
+    </div>
+    <button ng-click="x=generateNumber()" ng-init="x=0">Draw Number</button>
+    <p>Number is {{x}}</p>
+</div>
+<div>
+    <div some-directive></div>
+</div>
+<div>
+    <div class="container" ng-controller="ScopeController">
+        <div class="my-info">我的名字是：<span ng-bind="name"></span>
+            <!-- 使用"ng-bind"防止网络状态不佳时出现没有被赋值表达式   -->
+            <br/>我的年龄是：<span ng-bind="age"></span>   <br/>
+            <input type='text' ng-model='name'>
+
+
+        </div>
+        <!-- 使用属性声明指令 -->
+        <div class="my-directive" my-directive></div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
+<script type="text/javascript" src="ngJs/neizhizhiling3.js"></script>
+<script type="text/javascript">
+    function upperCase(x) {
+        var y = document.getElementById(x).value;
+        //document.getElementById(x).value=y.toUpperCase()
+        console.log(y);
+    }
+</script>

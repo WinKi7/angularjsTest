@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>repeatlist</title>
+    <script type="text/javascript" src="js/angular.js"></script>
+</head>
+<body ng-app>
+    <div>
+        Search:<input type="text" ng-model="query1">
+        Sort by:
+        <select ng-model="orderProp1">
+            <option value="name">Name</option>
+            <option value="price">Price</option>
+        </select>
+        <ul ng-controller="PhoneList">
+            <li ng-repeat="phone in phones | filter:query1 | orderBy:orderProp1">
+                <span>{{phone.name}}:</span><span>{{phone.price}}</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    function PhoneList($scope){
+        $scope.phones=[
+             {"name":"a1","price":"1000"},
+             {"name":"a2","price":"2000"},
+             {"name":"a3","price":"5000"},
+             {"name":"a4","price":"4000"},
+             {"name":"a5","price":"3000"}
+         ];
+        $scope.orderBy = "price";
+    }
+
+
+    describe('repeatlist controller',function(){
+        describe('PhoneList',function(){
+            it('should create "phones" model with 5 phones',function(){
+                var scope = {},
+                ctrl = new PhoneList(scope);
+                expect(scope.phones.length).toBe(2);
+            });
+        });
+    });
+</script>
